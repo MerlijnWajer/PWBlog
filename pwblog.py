@@ -18,7 +18,7 @@ STATIC_URL = BASE_URL + '/static'
 # HTML Allowed
 BLOG_NAME = '''
 <h1>Wizzup\'s Blog</h1>
-<p> About nonsense </p>
+<p> about:nonsense </p>
 '''
 
 def blogApp(env, start_response):
@@ -74,9 +74,16 @@ def error_page(env, error='No error?'):
 def blog_page(env, filename):
     tmpl = jinjaenv.get_template('main.html')
 
-    print filename
-
     f = open('blogs/%s.rst' % filename)
+    s = f.read()
+    o = render_rst(s)
+
+    return template_render(tmpl, env, {'body' : o['html_body']})
+
+def page_page(env, filename):
+    tmpl = jinjaenv.get_template('main.html')
+
+    f = open('pages/%s.rst' % filename)
     s = f.read()
     o = render_rst(s)
 

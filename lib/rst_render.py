@@ -60,5 +60,3 @@ def render_rst(rst_str):
     print 'Time:', t2-t
 
     return o
-
-#o = publish_string(s, writer_name='html', settings_overrides=overrides)
