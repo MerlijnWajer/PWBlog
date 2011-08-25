@@ -3,8 +3,9 @@ from jinja2 import Environment, PackageLoader
 
 from lib.sessionhack import SessionHack, SessionHackException
 from lib.webtool import WebTool
-from lib.rst_render import render_rst
 
+from lib.backend import make_backend
+from lib.fsbackend import FSPWBlogBackend
 
 import datetime
 import os
@@ -71,19 +72,19 @@ def error_page(env, error='No error?'):
     tmpl = jinjaenv.get_template('error.html')
     return template_render(tmpl, env, {'error' : error})
 
-def blog_page(env, filename):
+def blog_page(env, entry):
+    o = backend.lookup_entry(entry)
+    if not o:
+        return None
+
     tmpl = jinjaenv.get_template('main.html')
 
-    f = open('blogs/%s.rst' % filename)
-    s = f.read()
-    o = render_rst(s)
+    return template_render(tmpl, env, {'body' : o.html_data})
 
-    return template_render(tmpl, env, {'body' : o['html_body']})
-
-def page_page(env, filename):
+def page_page(env, entry):
     tmpl = jinjaenv.get_template('main.html')
 
-    f = open('pages/%s.rst' % filename)
+    f = open('pages/%s.rst' % entry)
     s = f.read()
     o = render_rst(s)
 
@@ -142,7 +143,11 @@ if __name__ == '__main__':
     jinjaenv.autoescape = True
     wt = WebTool()
 
+    backend = make_backend(FSPWBlogBackend, path=\
+            os.path.dirname(os.path.abspath(__file__))+'/blogs/')
+
     execfile('rules.py')
+
 
     app = blogApp
     app = SessionHack(app, error_page)
