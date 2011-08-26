@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 from jinja2 import Environment, PackageLoader
 
@@ -77,6 +78,9 @@ def blog_page(env, entry):
     if entry is None:
 
         o = backend.get_all_entries()
+
+        if o:
+            o = backend.lookup_entry(o[0]._id)
 
         if not o:
             return None
