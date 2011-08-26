@@ -1,3 +1,9 @@
+..
+    :Author: Merlijn Wajer
+    :Date: 2011-08-25
+    :Categories: pwblog, todo
+    :Title: Welcome to PWBlog
+
 Welcome to PWBlog
 =================
 

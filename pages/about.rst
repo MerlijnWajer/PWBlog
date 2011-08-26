@@ -1,3 +1,9 @@
+..
+    :Author: Merlijn Wajer
+    :Date: 2011-08-23
+    :Categories: pwblog, todo
+    :Title: About My Life
+
 About My Life
 =============
 

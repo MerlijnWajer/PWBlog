@@ -1,3 +1,9 @@
+..
+    :Author: Merlijn Wajer
+    :Date: 2011-08-25
+    :Categories: pwblog, todo
+    :Title: TODO for PWBlog
+
 TODO For PWBlog
 ===============
 
@@ -8,8 +14,8 @@ TODO For PWBlog
 PWBlog is by no means a product ready for production.
 
 
-FileSystem Backend
-------------------
+FileSystem Backend [DONE]
+-------------------------
 
 Very basic functionality is implemented; it can load and parse *.rst* files
 and return the *.html* data.
@@ -17,21 +23,22 @@ and return the *.html* data.
 Attributes
 ~~~~~~~~~~
 
-It now needs to support more attributes:
+All attributes are supported:
 
-    -   Title. ``rst_parts['title']``
-    -   Author. (Use one folder per author?)
-    -   Creation Date (Use stat(), or parse)
-    -   Categories (Parse)
+    -   Title
+    -   Author
+    -   Date
+    -   Categories
 
 Caching
 ~~~~~~~
 
-It's a good idea to cache the *.rst* -> *.html* conversions; and only parse the
-*.rst* files again if their modification date has changed.
+.. DANGER::
 
-We'll also need to build some sort of mini database to implement operations such
-as *get_all_entries()*. The database should incorporate caching.
+    Caching is implemented. There is only one downside: it won't load new files (one
+    created after the file is started) to the cache/db until they are
+    accessed/loaded at least once.
+
 
 SQL Backend
 -----------

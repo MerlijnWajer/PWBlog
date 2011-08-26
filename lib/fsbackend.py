@@ -1,42 +1,153 @@
+# Some of the code in here is terrible. I still need to read up on the best way
+# to use utf8 in python
+
+
 from lib.rst_render import render_rst
 import datetime
 import os
+import stat
+
 import re
+
+def parse_headers(f):
+    """
+    """
+    line = f.readline()
+    if not f:
+        raise Exception('File invalid')
+
+    if not line.startswith('..'):
+        raise Exception('File contains no info')
+
+    contents = ''
+
+    while True:
+        line = f.readline()
+        if line.startswith('    :') or line.startswith('\t:'):
+            contents += line
+        else:
+            break
+
+    reg = re.compile(':(\w+): (.+)')
+    res = reg.findall(contents)
+
+    parsed_obj = dict()
+    for name, val in res:
+        name = name.lower()
+        if name in ('author', 'title'):
+            parsed_obj[name] = val.decode('utf8')
+        elif name in ('date',):
+            try:
+                date = datetime.datetime( **dict(zip(['year', 'month', 'day'], \
+                        map(lambda x: int(x), val.split('-')))) )
+            except TypeError:
+                raise Exception('Invalid date: %s' % val)
+
+            parsed_obj[name] = date
+
+        elif name in ('categories',):
+            parsed_obj[name] = map(lambda x: x.decode('utf8'), val.split(','))
+        else:
+            raise Exception('Invalid file data: %s' % name)
+
+    return (f.read(), parsed_obj)
 
 class FSPWBlogBackend(object):
     """
-    Python WeBlog backend.
+    Python WeBlog Filesystem backend.
     """
     def __init__(self, path):
         self.path = path
+
+        self.build_db()
+
+    def build_db(self):
+        blogs = None
+
+        self._db = {}
+
+        for root, dirs, files in os.walk(self.path):
+            if root == self.path:
+                blogs = filter(lambda f: f.endswith('.rst'), files)
+                break
+
+        if blogs is None:
+            return
+
+        for x in blogs:
+            e = self.lookup_entry(x[:-4])
+            if e is None:
+                continue
+
+            st = os.stat(self.path + x)
+            self._db[x[:-4]] = dict(obj=e, last_modified=st[stat.ST_MTIME])
+
 
     def lookup_entry(self, key):
         """
         Look up a specific post identified by *key*.
         Return a BlogEntry object.
         """
+        try:
+            st = os.stat(self.path + key + '.rst')
+        except OSError, e:
+            print 'File does not exist:', e
+            return None
+
+        if key in self._db:
+            print 'May use cache...'
+            if st[stat.ST_MTIME] > self._db[key]['last_modified']:
+                print 'File has been modified'
+            else:
+                print 'File has not been modified. Using cache'
+                return self._db[key]['obj']
 
         try:
             f = open(self.path + key + '.rst')
-            data = f.read()
+            data, headers = parse_headers(f)
         except IOError, e:
             print 'Error:', e
             return None
 
         rst = render_rst(data)
 
-        title = rst['title'] # FIXME
+        title = headers['title'] if 'title' in headers else None
+        author = headers['author'] if 'author' in headers else None
+        date = headers['date'] if 'date' in headers else None
+        categories = headers['categories'] if 'categories' in headers else None
+
         body = rst['html_body']
 
-        return FSBlogEntry(_id=key, title=title, html_data=body)
+        entry = FSBlogEntry(key, author, title, categories,
+            date, body)
 
+        self._db[key] = dict(obj=entry, last_modified=st[stat.ST_MTIME])
+
+        return entry
+
+    # Maybe an iterator?
     def get_all_entries(self):
-        for root, dirs, files in os.walk(self.path):
-            if root == self.path:
-                return map(lambda e: FSBlogEntry(_id=e,title=e), map(lambda s: s[:-4],
-                    filter(lambda f: f.endswith('.rst'), files)))
+        res = []
+        for x, y in self._db.iteritems():
+            res.append(y['obj'])
+        return res
 
-        return []
+    def get_all_authors(self):
+        res = {}
+        for x, y in self._db.iteritems():
+            res[y['obj'].author.name] = None
+
+        return [x for x in res.iterkeys()]
+
+    def get_all_categories(self):
+        res = {}
+        for x, y in self._db.iteritems():
+            cat = res[y]['obj'].categories
+            for x in cat:
+                res[x] = None
+
+        return [x for x in res.iterkeys()]
+
 
 class FSBlogEntry(object):
     """
@@ -45,25 +156,23 @@ class FSBlogEntry(object):
     def __init__(self, _id=None, author=None, title=None, categories=[], \
             creation_date=None, html_data=None):
 
-        self._id, self.author, self.title, self.categories, self.creation_date,\
-            self.html_data = _id, author, title, categories, creation_date,\
-            html_data
+        self._id = _id
+        self.author = FSBlogAuthor(author)
+        self.title = title
+        self.categories = map(lambda x: FSBlogCategory(x), categories)
+        self.creation_date = creation_date
+        self.html_data = html_data
 
 class FSBlogAuthor(object):
     """
     A blog author object.
     """
     def __init__(self, name, mail=None):
-        pass
-
-    def get_all_entries(self):
-        return []
+        self.name = name
+        self.mail = mail
 
 class FSBlogCategory(object):
     """
     """
     def __init__(self, name):
-        pass
-
-    def get_all_entries(self):
-        return []
+        self.name = name

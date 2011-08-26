@@ -8,12 +8,6 @@
 /* This stylesheet provides syntax highlight for documents generated with a */
 /* pygments_ enhanced reStructured Text -> html converter. */
 
-/* Import the default docutils style sheet */
-/* --------------------------------------- */
-/* :: */
-
-@import url("/stylesheets/html4css1.css");
-
 /* Indent the code block */
 /* --------------------- */
 
