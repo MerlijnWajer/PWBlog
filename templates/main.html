@@ -1,8 +1,35 @@
 {% extends "base.jinja2" %}
 
+{% block title %}
+{{ title }}
+{% endblock %}
+
 {% block main %}
 
 {# Don't escape the body - it's HTML :-) #}
 {{ body|safe }}
+
+{% endblock %}
+
+{% block aside %}
+
+<h4> Links </h4>
+
+<ul>
+    {% for x in related_page %}
+    <li> <a href="{{base_url}}/page/{{ x._id }}">{{ x.title }} </a> </li>
+    {% endfor %}
+</ul>
+
+<h4> Other posts </h4>
+<ul>
+    {% for x in related %}
+    <li> <a href="{{base_url}}/blog/{{ x._id }}">{{ x.title }} </a> </li>
+    {% endfor %}
+</ul>
+
+{% if content %}
+{{ content|safe }}
+{% endif %}
 
 {% endblock %}

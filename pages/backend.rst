@@ -1,6 +1,21 @@
 Backends
 ========
 
+
+A blog entry needs the following:
+
+    -   ID (Name)
+    -   Title (maybe?)
+    -   Categories (tags)
+    -   Creation Date
+    -   Data (.html)
+
+Author has the following properties:
+
+    -   ID / Name
+    -   Password (hash) *May not be required if the backend is a FS*
+    -   Mail
+
 .. code-block:: python
 
     class PWBlogBackend(object):
@@ -15,10 +30,11 @@ Backends
             Look up a specific post identified by *key*.
             Return a BlogEntry object.
             """
-            # Do lookup work
-            b = BlogEntry()
 
-            return b
+        def get_all_entries():
+            """
+            Return all entries as a list of BlogEntries
+            """
 
     class BlogEntry(object):
         """
@@ -43,18 +59,3 @@ Backends
 
         def get_all_entries(self):
             return []
-
-A blog entry needs the following:
-
-    -   ID (Name)
-    -   Title (maybe?)
-    -   Categories (tags)
-    -   Creation Date
-    -   Data (.rst / .html)
-
-Author has the following properties:
-
-    -   ID / Name
-    -   Password (hash) *May not be required if the backend is a FS and we only
-        have one author*
-    -   Mail

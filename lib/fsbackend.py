@@ -1,6 +1,7 @@
 from lib.rst_render import render_rst
 import datetime
 import os
+import re
 
 class FSPWBlogBackend(object):
     """
@@ -22,25 +23,31 @@ class FSPWBlogBackend(object):
             print 'Error:', e
             return None
 
-        rst = render_rst(data)['html_body']
+        rst = render_rst(data)
 
-        b = FSBlogEntry(author=None, title=key, categories=[],
-                creation_date=datetime.datetime.now(), html_data=rst)
+        title = rst['title'] # FIXME
+        body = rst['html_body']
 
-        return b
+        return FSBlogEntry(_id=key, title=title, html_data=body)
 
     def get_all_entries(self):
+        for root, dirs, files in os.walk(self.path):
+            if root == self.path:
+                return map(lambda e: FSBlogEntry(_id=e,title=e), map(lambda s: s[:-4],
+                    filter(lambda f: f.endswith('.rst'), files)))
+
         return []
 
 class FSBlogEntry(object):
     """
     A Blog post/entry.
     """
-    def __init__(self, author, title, categories, creation_date, html_data):
-        self.author, self.title, self.categories, self.creation_date, \
-            self.html_data = \
-            author, title, categories, creation_date, html_data
-        pass
+    def __init__(self, _id=None, author=None, title=None, categories=[], \
+            creation_date=None, html_data=None):
+
+        self._id, self.author, self.title, self.categories, self.creation_date,\
+            self.html_data = _id, author, title, categories, creation_date,\
+            html_data
 
 class FSBlogAuthor(object):
     """

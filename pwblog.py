@@ -74,27 +74,43 @@ def error_page(env, error='No error?'):
     return template_render(tmpl, env, {'error' : error})
 
 def blog_page(env, entry):
-    o = backend.lookup_entry(entry)
-    if not o:
-        return None
+    if entry is None:
+
+        o = backend.get_all_entries()
+
+        if not o:
+            return None
+
+    else:
+        o = backend.lookup_entry(entry)
+        if not o:
+            return None
+
+    related = backend.get_all_entries()
+    related_page = backend_page.get_all_entries()
 
     tmpl = jinjaenv.get_template('main.html')
 
-    return template_render(tmpl, env, {'body' : o.html_data})
+    return template_render(tmpl, env, {'body' : o.html_data,
+            'title' : o.title,
+            'related' : related, 'related_page' : related_page})
 
 def page_page(env, entry):
     o = backend_page.lookup_entry(entry)
     if not o:
         return None
 
+    related = backend.get_all_entries()
+    related_page = backend_page.get_all_entries()
+
     tmpl = jinjaenv.get_template('main.html')
 
-    return template_render(tmpl, env, {'body' : o['html_body']})
+    return template_render(tmpl, env, {'body' : o.html_data,
+            'title' : o.title,
+            'related' : related, 'related_page' : related_page})
 
 def main_page(env):
-    tmpl = jinjaenv.get_template('main.html')
-
-    return template_render(tmpl, env, {})
+    return blog_page(env, entry=None)
 
 def static_serve(env, static_file):
     """

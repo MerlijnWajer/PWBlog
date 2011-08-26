@@ -1,5 +1,5 @@
-About
-=====
+About My Life
+=============
 
 *Typically this would be the page containing information about you.
 At the moment it just contains information about PWBlog*
