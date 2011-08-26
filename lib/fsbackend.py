@@ -153,10 +153,10 @@ class FSBlogEntry(object):
     """
     A Blog post/entry.
     """
-    def __init__(self, _id=None, author=None, title=None, categories=[], \
+    def __init__(self, shortname=None, author=None, title=None, categories=[], \
             creation_date=None, html_data=None):
 
-        self._id = _id
+        self.shortname = shortname
         self.author = FSBlogAuthor(author)
         self.title = title
         self.categories = map(lambda x: FSBlogCategory(x), categories)

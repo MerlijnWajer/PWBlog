@@ -40,10 +40,10 @@ Caching
     accessed/loaded at least once.
 
 
-SQL Backend
------------
+SQL Backend [DONE]
+------------------
 
-TODO
+Needs testing with MySQL and PostgreSQL, but I expect no issues.
 
 Custom RST Directives
 ---------------------

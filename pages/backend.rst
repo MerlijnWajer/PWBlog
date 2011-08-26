@@ -10,8 +10,8 @@ Backends
 
 A blog entry needs the following:
 
-    -   ID (Name)
-    -   Title (maybe?)
+    -   Shortname (id)
+    -   Title
     -   Categories (tags)
     -   Creation Date
     -   Data (.html)
@@ -46,14 +46,14 @@ Author has the following properties:
         """
         A Blog post/entry.
         """
-        def __init__(self, author, title, categories, creation_date, html_data):
+        def __init__(self, shortname, author, title, categories, creation_date, html_data):
             pass
 
     class BlogAuthor(object):
         """
         A blog author object.
         """
-        def __init__(self, name, mail=None):
+        def __init__(self, name, password,  mail):
             pass
 
         def get_all_entries(self):

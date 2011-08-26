@@ -8,6 +8,7 @@ from lib.webtool import WebTool
 from lib.backend import make_backend
 from lib.rst_render import render_rst
 from lib.fsbackend import FSPWBlogBackend
+from lib.sqlbackend import SQLPWBlogBackend
 
 import datetime
 import os
@@ -80,7 +81,7 @@ def blog_page(env, entry):
         o = backend.get_all_entries()
 
         if o:
-            o = backend.lookup_entry(o[0]._id)
+            o = backend.lookup_entry(o[0].shortname)
 
         if not o:
             return None
@@ -92,11 +93,13 @@ def blog_page(env, entry):
 
     related = backend.get_all_entries()
     related_page = backend_page.get_all_entries()
+    categories = backend.get_all_categories()
+    print categories
 
     tmpl = jinjaenv.get_template('main.html')
 
-    return template_render(tmpl, env, {'body' : o.html_data,
-            'title' : o.title,
+    return template_render(tmpl, env, {'post' : o,
+            'categories' : categories,
             'related' : related, 'related_page' : related_page})
 
 def page_page(env, entry):
@@ -106,11 +109,13 @@ def page_page(env, entry):
 
     related = backend.get_all_entries()
     related_page = backend_page.get_all_entries()
+    categories = backend.get_all_categories()
+    print categories
 
     tmpl = jinjaenv.get_template('main.html')
 
-    return template_render(tmpl, env, {'body' : o.html_data,
-            'title' : o.title,
+    return template_render(tmpl, env, {'post' : o,
+            'categories' : categories,
             'related' : related, 'related_page' : related_page})
 
 def main_page(env):
@@ -164,8 +169,10 @@ if __name__ == '__main__':
     jinjaenv.autoescape = True
     wt = WebTool()
 
-    backend = make_backend(FSPWBlogBackend, path=\
-            os.path.dirname(os.path.abspath(__file__))+'/blogs/')
+    backend = make_backend(SQLPWBlogBackend)
+
+#    backend = make_backend(FSPWBlogBackend, path=\
+#            os.path.dirname(os.path.abspath(__file__))+'/blogs/')
 
     backend_page = make_backend(FSPWBlogBackend, path=\
             os.path.dirname(os.path.abspath(__file__))+'/pages/')

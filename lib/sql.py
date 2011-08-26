@@ -13,7 +13,7 @@ engine = create_engine('sqlite:///blog.db', echo=True)
 # Pass echo=True to see all SQL queries
 # When using MySQL; pass charset=utf8&use_unicode=1
 
-from classes import Base, User, Entry
+from lib.sqlbackend import Base, BlogEntry, BlogAuthor, BlogCategory
 
 Base.metadata.create_all(engine)
 metadata = Base.metadata

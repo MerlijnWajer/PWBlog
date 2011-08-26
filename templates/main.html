@@ -1,13 +1,15 @@
 {% extends "base.jinja2" %}
 
 {% block title %}
-{{ title }}
+{{ post.title }} by {{ post.author.name }}
 {% endblock %}
 
 {% block main %}
 
+<h4> by {{ post.author.name }} </h4>
+
 {# Don't escape the body - it's HTML :-) #}
-{{ body|safe }}
+{{ post.html_data|safe }}
 
 {% endblock %}
 
@@ -17,14 +19,33 @@
 
 <ul>
     {% for x in related_page %}
-    <li> <a href="{{base_url}}/page/{{ x._id }}">{{ x.title }} </a> </li>
+    <li>
+        <span class="datetime">
+            {{ x.creation_date.strftime('%a %d. %b %Y') }}
+        </span>
+        <a href="{{base_url}}/page/{{ x.shortname }}">{{ x.title }}</a>
+    </li>
     {% endfor %}
 </ul>
 
 <h4> Other posts </h4>
 <ul>
     {% for x in related %}
-    <li> <a href="{{base_url}}/blog/{{ x._id }}">{{ x.title }} </a> </li>
+    <li>
+        <span class="datetime">
+            {{ x.creation_date.strftime('%a %d. %b %Y') }}
+        </span>
+        <a href="{{base_url}}/blog/{{ x.shortname }}">{{ x.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h4> Categories </h4>
+<ul>
+    {% for x in categories %}
+    <li>
+    <a href="{{base_url}}/category/{{ x.name }}">{{ x.name }}</a>
+    </li>
     {% endfor %}
 </ul>
 
