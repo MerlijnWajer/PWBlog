@@ -5,6 +5,7 @@ from lib.sessionhack import SessionHack, SessionHackException
 from lib.webtool import WebTool
 
 from lib.backend import make_backend
+from lib.rst_render import render_rst
 from lib.fsbackend import FSPWBlogBackend
 
 import datetime
@@ -82,11 +83,11 @@ def blog_page(env, entry):
     return template_render(tmpl, env, {'body' : o.html_data})
 
 def page_page(env, entry):
-    tmpl = jinjaenv.get_template('main.html')
+    o = backend_page.lookup_entry(entry)
+    if not o:
+        return None
 
-    f = open('pages/%s.rst' % entry)
-    s = f.read()
-    o = render_rst(s)
+    tmpl = jinjaenv.get_template('main.html')
 
     return template_render(tmpl, env, {'body' : o['html_body']})
 
@@ -145,6 +146,9 @@ if __name__ == '__main__':
 
     backend = make_backend(FSPWBlogBackend, path=\
             os.path.dirname(os.path.abspath(__file__))+'/blogs/')
+
+    backend_page = make_backend(FSPWBlogBackend, path=\
+            os.path.dirname(os.path.abspath(__file__))+'/pages/')
 
     execfile('rules.py')
 
