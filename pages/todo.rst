@@ -7,24 +7,6 @@ TODO For PWBlog
 
 PWBlog is by no means a product ready for production.
 
-Short list:
-
-    -   Figure out what backend to use, or how to let the user choose from
-        one of the following:
-
-            -   SQL backend. (Support for MySQL, PostgreSQL and SQLite)
-            -   Filesystem backend. (With optional git support)
-
-    -   Markup language support:
-
-        -   reStructured Text.
-
-    -   Markup languages that may be supported later:
-
-        -   HTML
-        -   BBCode
-
-    -   Table of contents -> on the right? (Would make a good nav)
 
 FileSystem Backend
 ------------------
@@ -60,3 +42,31 @@ Custom RST Directives
 ---------------------
 
 Might be interesting?
+
+Source RST Download
+-------------------
+
+Allowing downloading the original *rst*, if available.
+
+PDF Download
+------------
+
+If possible, allow pdf conversion and download.
+
+Table of contents
+-----------------
+
+Perhaps specification? And it would be nice to have it on the right.
+
+
+Markup Languages
+----------------
+
+Supported:
+
+    -   reStructured Text.
+
+Unsupported:
+
+    -   HTML
+    -   BBCode
