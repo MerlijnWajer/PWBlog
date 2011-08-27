@@ -94,7 +94,6 @@ def blog_page(env, entry):
     related = backend.get_all_entries()
     related_page = backend_page.get_all_entries()
     categories = backend.get_all_categories()
-    print categories
 
     tmpl = jinjaenv.get_template('main.html')
 
@@ -110,7 +109,6 @@ def page_page(env, entry):
     related = backend.get_all_entries()
     related_page = backend_page.get_all_entries()
     categories = backend.get_all_categories()
-    print categories
 
     tmpl = jinjaenv.get_template('main.html')
 

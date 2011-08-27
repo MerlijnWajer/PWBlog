@@ -115,7 +115,6 @@ class FSBackend(object):
         author = headers['author'] if 'author' in headers else None
         date = headers['date'] if 'date' in headers else None
         categories = headers['categories'] if 'categories' in headers else None
-        print categories
 
         body = rst['html_body']
 

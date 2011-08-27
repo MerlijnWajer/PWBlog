@@ -20,16 +20,13 @@ class SQLBackend(object):
         return ret
 
     def get_all_entries(self):
-        ret = Session.query(BlogEntry).all()
-        return ret
+        return Session.query(BlogEntry).all()
 
     def get_all_authors(self):
-        ret = Session.query(BlogAuthor).all()
-        return ret
+        return Session.query(BlogAuthor).all()
 
     def get_all_categories(self):
-        ret = Session.query(BlogCategory).all()
-        return ret
+        return Session.query(BlogCategory).all()
 
 entry_categories = Table('entry_categories', metadata,
         Column('entry_id', Integer, ForeignKey('entries.id')),
@@ -58,9 +55,9 @@ class BlogEntry(Base):
             creation_date, html_data):
 
         self.shortname = shortname
-        self.author = author # TODO
+        self.author = author
         self.title = title
-        self.categories = categories # TODO
+        self.categories = categories
         self.creation_date = creation_date
         self.html_data = html_data
 
@@ -76,7 +73,6 @@ class BlogAuthor(Base):
     name = Column(Unicode(20), unique=True)
     password = Column(String(64), nullable=False)
     mail = Column(String(40), nullable=True)
-
 
     def __init__(self, name, password=None, mail=None):
         self.name = name
@@ -97,18 +93,4 @@ class BlogCategory(Base):
     def __init__(self, name):
         self.name = name
 
-
 from lib.sql import *
-
-
-if __name__ == '__main__':
-    a = BlogAuthor('Merlijn Wajer', 'BLA', 'mail')
-    Session.add(a)
-
-    e = BlogEntry(a, 'TestTitel', [], None, '<h1> DIT IS EEN TEST </h1>')
-    Session.add(e)
-
-    Session.commit()
-
-    s = SQLPWBlogBackend()
-    print s.get_all_entries
