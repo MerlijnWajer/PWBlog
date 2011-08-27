@@ -46,7 +46,7 @@ def parse_headers(f):
             parsed_obj[name] = date
 
         elif name in ('categories',):
-            parsed_obj[name] = map(lambda x: x.decode('utf8'), val.split(','))
+            parsed_obj[name] = map(lambda x: x.decode('utf8').strip(), val.split(','))
         else:
             raise Exception('Invalid file data: %s' % name)
 
@@ -115,6 +115,7 @@ class FSBackend(object):
         author = headers['author'] if 'author' in headers else None
         date = headers['date'] if 'date' in headers else None
         categories = headers['categories'] if 'categories' in headers else None
+        print categories
 
         body = rst['html_body']
 
@@ -142,11 +143,11 @@ class FSBackend(object):
     def get_all_categories(self):
         res = {}
         for x, y in self._db.iteritems():
-            cat = res[y]['obj'].categories
+            cat = y['obj'].categories
             for x in cat:
-                res[x] = None
+                res[x.name] = x
 
-        return [x for x in res.iterkeys()]
+        return [x for x in res.itervalues()]
 
 
 class FSBlogEntry(object):
