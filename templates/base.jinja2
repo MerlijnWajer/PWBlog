@@ -10,10 +10,15 @@ type="image/png" /> -->
 </head>
 <body>
 
+<div class="wiz">
+
 <header>
 {% block header %}
 
 {{ blog_name|safe }}
+{% block midheader %}
+
+{% endblock %}
 
 {% endblock %}
 </header>
@@ -36,11 +41,12 @@ type="image/png" /> -->
 <footer>
 {% block footer %}
 
-Powered by Python and PWBlog
+Powered by Python and PWBlog | Designed ripped from <a href="http://blog.kompiler.org">blog.kompiler.org</a>
 
 {% endblock %}
 </footer>
 
+</div>
 
 </body>
 </html>

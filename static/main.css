@@ -2,6 +2,7 @@ html {
     background-color: #fff;
     padding: 10px;
     margin: 0;
+    background-color: rgb(100, 100, 100);
 }
 
 body {
@@ -14,6 +15,17 @@ body {
     width: 900px;
 }
 
+div.wiz {
+    background-color: white;
+    padding: 2em;
+    margin-bottom: 1em;
+/*
+    border: 2em;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+*/
+}
+
 section#main {
     width: 600px;
 }
@@ -23,12 +35,16 @@ aside {
     margin-left: 620px;
     position: absolute;
     top: 106px;
-    width: 280px;
+    width: 230px;
 }
 
 a {
-    color: #66c;
+    color: #696;
     text-decoration: none;
+}
+
+a.toc-backref, a.aside-pl {
+    color: #666;
 }
 
 a:hover {
@@ -167,12 +183,13 @@ section#main {
 
 section#main h1, section#main h2, section#main h3 {
     border-bottom: 1px solid #ccc;
-    color: #55b;
+    padding-bottom: 5px;
+    color: #666;
     font-weight: normal;
 }
 
 cite {
-    color: #33c;
+/*    color: #33c; */
     font-style: normal;
 }
 
@@ -191,11 +208,11 @@ h3 {
     line-height: 18px;
 }
 
-body.syntax {
+body.highlight {
     background-color: #fff;
 }
 
-div.syntax {
+div.highlight {
     background-color: #fff;
     border-radius: 3px;
     border: 1px solid #d0d0d0;
@@ -203,8 +220,9 @@ div.syntax {
     width: 99.5%;
 }
 
-div.syntax pre {
-    background-color: #eee;
+div.highlight pre {
+    background-color: #ddd;
+    /*background-color: #eee;*/
     margin: 3px;
     padding: 3px;
 }
@@ -225,7 +243,7 @@ p.post_info span.author, p.post_info span.modified {
 
 aside h4 {
     border-bottom: 1px solid #ccc;
-    color: #55b;
+    color: #6a6;
     font-size: 16px;
     line-height: 20px;
     font-weight: bold;

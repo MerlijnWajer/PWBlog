@@ -4,9 +4,11 @@
 {{ post.title }} by {{ post.author.name }}
 {% endblock %}
 
+{% block midheader %}
+{% endblock %}
+
 {% block main %}
 
-<h4> by {{ post.author.name }} </h4>
 
 {# Don't escape the body - it's HTML :-) #}
 {{ post.html_data|safe }}
@@ -14,6 +16,18 @@
 {% endblock %}
 
 {% block aside %}
+
+<h4> Recent posts </h4>
+<ul>
+    {% for x in related %}
+    <li>
+        <span class="datetime">
+            {{ x.creation_date.strftime('%a %d. %b %Y') }}
+        </span>
+        <a class="aside-pl" href="{{base_url}}/blog/{{ x.shortname }}">{{ x.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
 
 <h4> Links </h4>
 
@@ -23,19 +37,7 @@
         <span class="datetime">
             {{ x.creation_date.strftime('%a %d. %b %Y') }}
         </span>
-        <a href="{{base_url}}/page/{{ x.shortname }}">{{ x.title }}</a>
-    </li>
-    {% endfor %}
-</ul>
-
-<h4> Other posts </h4>
-<ul>
-    {% for x in related %}
-    <li>
-        <span class="datetime">
-            {{ x.creation_date.strftime('%a %d. %b %Y') }}
-        </span>
-        <a href="{{base_url}}/blog/{{ x.shortname }}">{{ x.title }}</a>
+        <a class="aside-pl" href="{{base_url}}/page/{{ x.shortname }}">{{ x.title }}</a>
     </li>
     {% endfor %}
 </ul>
@@ -44,7 +46,7 @@
 <ul>
     {% for x in categories %}
     <li>
-    <a href="{{base_url}}/category/{{ x.name }}">{{ x.name }}</a>
+    <a class="aside-pl" href="{{base_url}}/category/{{ x.name }}">{{ x.name }}</a>
     </li>
     {% endfor %}
 </ul>
