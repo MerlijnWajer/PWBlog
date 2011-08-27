@@ -52,7 +52,7 @@ def parse_headers(f):
 
     return (f.read(), parsed_obj)
 
-class FSPWBlogBackend(object):
+class FSBackend(object):
     """
     Python WeBlog Filesystem backend.
     """

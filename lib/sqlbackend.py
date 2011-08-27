@@ -7,7 +7,7 @@ from sqlalchemy.orm import relationship, backref
 Base = declarative_base()
 metadata = Base.metadata
 
-class SQLPWBlogBackend(object):
+class SQLBackend(object):
     """
     Python WeBlog SQL backend.
     """

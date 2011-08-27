@@ -7,8 +7,8 @@ from lib.webtool import WebTool
 
 from lib.backend import make_backend
 from lib.rst_render import render_rst
-from lib.fsbackend import FSPWBlogBackend
-from lib.sqlbackend import SQLPWBlogBackend
+from lib.fsbackend import FSBackend
+#from lib.sqlbackend import SQLBackend
 
 import datetime
 import os
@@ -169,12 +169,12 @@ if __name__ == '__main__':
     jinjaenv.autoescape = True
     wt = WebTool()
 
-    backend = make_backend(SQLPWBlogBackend)
+#    backend = make_backend(SQLBackend)
 
-#    backend = make_backend(FSPWBlogBackend, path=\
-#            os.path.dirname(os.path.abspath(__file__))+'/blogs/')
+    backend = make_backend(FSBackend, path=\
+            os.path.dirname(os.path.abspath(__file__))+'/blogs/')
 
-    backend_page = make_backend(FSPWBlogBackend, path=\
+    backend_page = make_backend(FSBackend, path=\
             os.path.dirname(os.path.abspath(__file__))+'/pages/')
 
     execfile('rules.py')
