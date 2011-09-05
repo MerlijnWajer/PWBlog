@@ -181,7 +181,8 @@ section#main {
     clear: both;
 }
 
-section#main h1, section#main h2, section#main h3 {
+section#main h1, section#main h2, section#main h3,
+section#main h4, section#main h5 {
     border-bottom: 1px solid #ccc;
     padding-bottom: 5px;
     color: #666;
@@ -206,6 +207,16 @@ h2 {
 h3 {
     font-size: 18px;
     line-height: 18px;
+}
+
+h4 {
+    font-size: 14px;
+    line-height: 14px;
+}
+
+h5 {
+    font-size: 12px;
+    line-height: 12px;
 }
 
 body.highlight {
