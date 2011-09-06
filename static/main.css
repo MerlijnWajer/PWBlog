@@ -289,7 +289,9 @@ p.admonition-title {
     font-weight: bold;
 }
 
-div.error, div.warning {
+
+div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
     -moz-border-radius: 15px;
     border-radius: 15px;
 
@@ -300,10 +302,38 @@ div.error, div.warning {
     margin-bottom: 1em;
 }
 
+div.attention {
+    background-color: #FAF;
+}
+
+div.caution {
+    background-color: #F97;
+}
+
+div.danger {
+    background-color: #F33;
+}
+
 div.error {
-    background-color: #FBB;
+    background-color: #F66;
+}
+
+div.hint {
+    background-color: #BFB;
+}
+
+div.important {
+    background-color: #BBF;
+}
+
+div.note {
+    background-color: #FFB;
+}
+
+div.tip {
+    background-color: #BFB;
 }
 
 div.warning {
-    background-color: #FFB;
+    background-color: #F72;
 }
