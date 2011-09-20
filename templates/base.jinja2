@@ -23,34 +23,34 @@ type="image/png" /> -->
 {% endblock %}
 </header>
 
-<div>
+
+<section id="main">
+{% block main %}
+
+{% endblock %}
+</section>
+
+
+
+<footer>
+{% block footer %}
+
+Powered by Python and PWBlog
+
+{% endblock %}
+</footer>
+
+</div>
+
+<div class="aside">
 <aside>
 {% block aside %}
 
 <h4> Looks pretty empty to me </h4>
 
 {% endblock %}
+
 </aside>
-
-<section id="main">
-<div class="main">
-{% block main %}
-
-{% endblock %}
-</div>
-</section>
-
-
-</div>
-
-<footer>
-{% block footer %}
-
-Powered by Python and PWBlog | Designed ripped from <a href="http://blog.kompiler.org">blog.kompiler.org</a>
-
-{% endblock %}
-</footer>
-
 </div>
 
 </body>

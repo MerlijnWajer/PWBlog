@@ -27,19 +27,19 @@ div.wiz {
 }
 
 section#main {
-    width: 600px;
-}
-
-div.main {
-    position: relative;
-    top: -570px;
+    background-color: #fff;
+    clear: both;
+    width: 550px;
+    padding-top: 20px;
 }
 
 aside {
-    float: left;
-    margin-left: 620px;
-    position: relative;
-    width: 230px;
+    position: absolute;
+    top: 110px;
+    left: 600px;
+    background-color: white;
+    padding: 2em;
+    margin-bottom: 1em;
 }
 
 a {
@@ -78,64 +78,6 @@ pre {
 ul {
     margin: 10px 0 10px 20px;
     padding: 0;
-}
-
-@media screen and (max-width: 920px) {
-    body {
-        margin-left: -390px;
-        width: 780px;
-    }
-
-    section#main {
-        width: inherit;
-    }
-
-    aside {
-        float: none;
-        margin-left: 0;
-        position: relative;
-        top: 0;
-        width: inherit;
-    }
-}
-
-@media screen and (max-width: 780px), print {
-    html {
-        padding: 0;
-    }
-
-    body {
-        margin-left: -230px;
-        width: 460px;
-    }
-
-    header {
-        border-top: 0 !important;
-        padding-bottom: 0 !important;
-    }
-
-    header p {
-        display: none;
-    }
-
-    section#main {
-        width: inherit;
-    }
-
-    aside {
-        float: none;
-        margin-left: 0;
-        position: relative;
-        top: 0;
-        width: inherit;
-    }
-}
-
-@media print {
-    section p a:link:after, section p a:visited:after {
-        content: " (" attr(href) ") ";
-        font-size: 90%;
-    }
 }
 
 header, footer {
@@ -179,11 +121,6 @@ header h1 a {
 /*
  * Main content style
  */
-
-section#main {
-    background-color: #fff;
-    clear: both;
-}
 
 section#main h1, section#main h2, section#main h3,
 section#main h4, section#main h5 {
@@ -340,9 +277,4 @@ div.tip {
 
 div.warning {
     background-color: #F72;
-}
-
-table.citation {
-/*    font-size: 12px;*/
-    margin-bottom: 1em;
 }
