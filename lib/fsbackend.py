@@ -132,6 +132,13 @@ class FSBackend(object):
             res.append(y['obj'])
         return res
 
+    def get_all_entries_by_category(self, category):
+        res = []
+        for x, y in self._db.iteritems():
+            if category in map(lambda x: x.name, y['obj'].categories):
+                res.append(y['obj'])
+        return res
+
     def get_all_authors(self):
         res = {}
         for x, y in self._db.iteritems():

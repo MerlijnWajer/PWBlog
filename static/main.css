@@ -30,11 +30,15 @@ section#main {
     width: 600px;
 }
 
+div.main {
+    position: relative;
+    top: -570px;
+}
+
 aside {
-    float: right;
+    float: left;
     margin-left: 620px;
-    position: absolute;
-    top: 106px;
+    position: relative;
     width: 230px;
 }
 
@@ -336,4 +340,9 @@ div.tip {
 
 div.warning {
     background-color: #F72;
+}
+
+table.citation {
+/*    font-size: 12px;*/
+    margin-bottom: 1em;
 }

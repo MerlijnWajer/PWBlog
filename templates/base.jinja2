@@ -23,20 +23,25 @@ type="image/png" /> -->
 {% endblock %}
 </header>
 
-<section id="main">
-{% block main %}
-
-{% endblock %}
-</section>
-
+<div>
 <aside>
 {% block aside %}
 
 <h4> Looks pretty empty to me </h4>
 
 {% endblock %}
-
 </aside>
+
+<section id="main">
+<div class="main">
+{% block main %}
+
+{% endblock %}
+</div>
+</section>
+
+
+</div>
 
 <footer>
 {% block footer %}

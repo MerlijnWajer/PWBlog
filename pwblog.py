@@ -15,6 +15,8 @@ import os
 import mimetypes
 import stat
 
+import urllib
+
 USE_OWN_HTTPD = True
 BASE_URL = ''
 STATIC_URL = BASE_URL + '/static'
@@ -115,6 +117,22 @@ def page_page(env, entry):
     return template_render(tmpl, env, {'post' : o,
             'categories' : categories,
             'related' : related, 'related_page' : related_page})
+
+def category_page(env, category):
+    blogs = backend.get_all_entries_by_category(category)
+
+    related = backend.get_all_entries()
+    related_page = backend_page.get_all_entries()
+    categories = backend.get_all_categories()
+
+    tmpl = jinjaenv.get_template('category.html')
+
+    return template_render(tmpl, env, {'blogs' : blogs,
+            'category' : category,
+            'categories' : categories,
+            'related' : related, 'related_page' : related_page})
+
+
 
 def main_page(env):
     return blog_page(env, entry=None)
