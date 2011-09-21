@@ -23,26 +23,12 @@ type="image/png" /> -->
 {% endblock %}
 </header>
 
-
 <section id="main">
 {% block main %}
 
 {% endblock %}
 </section>
 
-
-
-<footer>
-{% block footer %}
-
-Powered by Python and PWBlog
-
-{% endblock %}
-</footer>
-
-</div>
-
-<div class="aside">
 <aside>
 {% block aside %}
 
@@ -51,6 +37,15 @@ Powered by Python and PWBlog
 {% endblock %}
 
 </aside>
+
+<footer>
+{% block footer %}
+
+Powered by Python and PWBlog | Designed ripped from <a href="http://blog.kompiler.org">blog.kompiler.org</a>
+
+{% endblock %}
+</footer>
+
 </div>
 
 </body>
