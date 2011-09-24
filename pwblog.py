@@ -23,8 +23,8 @@ STATIC_URL = BASE_URL + '/static'
 
 # HTML Allowed
 BLOG_NAME = '''
-<h1>Wizzup\'s Blog</h1>
-<p> about:nonsense </p>
+<h3> Wizzup\'s Blog: about:nonsense </h3>
+<ul> <li>hi</li></ul>
 '''
 
 def blogApp(env, start_response):

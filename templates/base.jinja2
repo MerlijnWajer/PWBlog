@@ -3,16 +3,20 @@
 <head>
 <!--    <link rel="shortcut icon" href="{{static_url}}/favicon.png"
 type="image/png" /> -->
+    <link rel="stylesheet" type="text/css" href="{{static_url}}/basic.css" />
+    <link rel="stylesheet" type="text/css" href="{{static_url}}/nature.css" />
+    <link rel="stylesheet" type="text/css" href="{{static_url}}/pygments.css" />
+    <!--
     <link rel="stylesheet" type="text/css" href="{{static_url}}/main.css" />
     <link rel="stylesheet" type="text/css" href="{{static_url}}/pygments-default.css" />
-    <meta charset="utf-8"/>
+    -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>{% block title %} Blog {% endblock %}</title>
 </head>
 <body>
 
-<div class="wiz">
+<div class="related">
 
-<header>
 {% block header %}
 
 {{ blog_name|safe }}
@@ -21,30 +25,52 @@ type="image/png" /> -->
 {% endblock %}
 
 {% endblock %}
-</header>
+</div>
 
-<section id="main">
+<div class="nature-document">
+
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body">
+
+
+<div class="section">
 {% block main %}
 
 {% endblock %}
-</section>
+</div>
 
-<aside>
-{% block aside %}
 
-<h4> Looks pretty empty to me </h4>
+</div>
+</div>
+</div>
 
-{% endblock %}
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
 
-</aside>
+    {% block aside %}
 
-<footer>
+    <h4> Looks pretty empty to me </h4>
+
+    {% endblock %}
+
+</div>
+</div>
+
+<div class="clearer"></div>
+
+</div>
+
+<div class="related">
+    Hoi
+</div>
+
+<div class="footer">
 {% block footer %}
 
 Powered by Python and PWBlog | Designed ripped from <a href="http://blog.kompiler.org">blog.kompiler.org</a>
 
 {% endblock %}
-</footer>
 
 </div>
 
