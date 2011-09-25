@@ -130,6 +130,7 @@ class FSBackend(object):
         res = []
         for x, y in self._db.iteritems():
             res.append(y['obj'])
+        res.sort(key=lambda x: x.creation_date, reverse=True)
         return res
 
     def get_all_entries_by_category(self, category):
@@ -137,6 +138,7 @@ class FSBackend(object):
         for x, y in self._db.iteritems():
             if category in map(lambda x: x.name, y['obj'].categories):
                 res.append(y['obj'])
+        res.sort(key=lambda x: x.creation_date, reverse=True)
         return res
 
     def get_all_authors(self):
@@ -144,7 +146,7 @@ class FSBackend(object):
         for x, y in self._db.iteritems():
             res[y['obj'].author.name] = None
 
-        return [x for x in res.iterkeys()]
+        return sorted(res.iterkeys(), key=lambda x: x.name)
 
     def get_all_categories(self):
         res = {}
@@ -153,7 +155,7 @@ class FSBackend(object):
             for x in cat:
                 res[x.name] = x
 
-        return [x for x in res.itervalues()]
+        return sorted(res.itervalues(), key=lambda x: x.name)
 
 
 class FSBlogEntry(object):
