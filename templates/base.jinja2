@@ -3,48 +3,76 @@
 <head>
 <!--    <link rel="shortcut icon" href="{{static_url}}/favicon.png"
 type="image/png" /> -->
+    <link rel="stylesheet" type="text/css" href="{{static_url}}/basic.css" />
+    <link rel="stylesheet" type="text/css" href="{{static_url}}/nature.css" />
+    <link rel="stylesheet" type="text/css" href="{{static_url}}/pygments.css" />
+    <!--
     <link rel="stylesheet" type="text/css" href="{{static_url}}/main.css" />
     <link rel="stylesheet" type="text/css" href="{{static_url}}/pygments-default.css" />
-    <meta charset="utf-8"/>
+    -->
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
     <title>{% block title %} Blog {% endblock %}</title>
 </head>
 <body>
 
-<div class="wiz">
-
-<header>
+<div class="related" style="padding-left: 5px">
 {% block header %}
+<div> <a href="//wizzup.org">Wizzup.org</a>
+      <a href="//blog.wizzup.org/">Blog</a>: »
+    {%block article_name%}
+    {%endblock%}
+</div>
 
-{{ blog_name|safe }}
-{% block midheader %}
-
+{# {{ blog_name|safe }} #}
 {% endblock %}
+</div>
 
-{% endblock %}
-</header>
+<div class="nature-document">
 
-<section id="main">
+<div class="documentwrapper">
+<div class="bodywrapper">
+<div class="body">
+
+
+<div class="section">
 {% block main %}
 
 {% endblock %}
-</section>
+</div>
 
-<aside>
-{% block aside %}
 
-<h4> Looks pretty empty to me </h4>
+</div>
+</div>
+</div>
 
-{% endblock %}
+<div class="sphinxsidebar">
+<div class="sphinxsidebarwrapper">
 
-</aside>
+    {% block aside %}
 
-<footer>
+    <h4> Looks pretty empty to me </h4>
+
+    {% endblock %}
+
+</div>
+</div>
+
+<div class="clearer"></div>
+
+</div>
+
+<div class="related" style="padding-left: 5px">
+<div> <a href="//wizzup.org">Wizzup.org</a>
+    <a href="//blog.wizzup.org/">Blog</a>: »
+</div>
+</div>
+
+<div class="footer">
 {% block footer %}
 
-Powered by Python and PWBlog | Designed ripped from <a href="http://blog.kompiler.org">blog.kompiler.org</a>
+Powered by Python and PWBlog | Merlijn Wajer, 2011
 
 {% endblock %}
-</footer>
 
 </div>
 

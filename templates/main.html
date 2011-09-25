@@ -4,7 +4,17 @@
 {{ post.title }} by {{ post.author.name }}
 {% endblock %}
 
-{% block midheader %}
+{% block article_name %}
+
+<a href="{{baseur_url}}/blog/{{post.shortname}}">
+    {{ post.title }}
+</a>
+
+<i>
+    ( {{ post.creation_date.strftime("%A, %d %B %Y") }}
+    by <a href="{{base_url}}/user/{{post.author.name}}">{{ post.author.name
+        }})</a>
+</i>
 {% endblock %}
 
 {% block main %}

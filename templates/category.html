@@ -1,7 +1,7 @@
 {% extends "base.jinja2" %}
 
 {% block title %}
-All posts tagged {{category }}
+All posts tagged: {{ category }}
 {% endblock %}
 
 {% block midheader %}
@@ -10,11 +10,30 @@ All posts tagged {{category }}
 {% block main %}
 
 
-<ul>
+<div class="document" id="category {{ category }}">
+    <h1 class="title"> Category: {{ category}}</h1>
+
+<div class="contents topic" id="contents">
+    <p class="topic-title first"> All posts tagged {{category}}: </p>
+</div>
+
 {% for x in blogs %}
-    <li><a href="{{base_url}}/blog/{{x.shortname}}">{{ x.title }}</a></li>
+
+    <div class="section" id="your-first-pwblog-page">
+    <h2>
+        <a href="{{base_url}}/blog/{{x.shortname}}">{{ x.title }}</a>
+    </h2>
+
+    <p> by: {{ x.author.name }} on {{ x.creation_date.strftime("%A, %d %B %Y") }}. </p>
+
+    <p>
+    </p>
+
+    </div>
+
 {% endfor %}
-</ul>
+
+</div>
 
 {% endblock %}
 

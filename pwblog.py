@@ -22,9 +22,8 @@ BASE_URL = ''
 STATIC_URL = BASE_URL + '/static'
 
 # HTML Allowed
+# REMOVED FOR NOW XXX
 BLOG_NAME = '''
-<h1>Wizzup\'s Blog</h1>
-<p> about:nonsense </p>
 '''
 
 def blogApp(env, start_response):
@@ -36,8 +35,15 @@ def blogApp(env, start_response):
         start_response('404 Not Found', [('Content-Type', 'text/html')])
         tmpl = jinjaenv.get_template('404.html')
 
+        related = backend.get_all_entries()
+        related_page = backend_page.get_all_entries()
+        categories = backend.get_all_categories()
+
+
         return template_render(tmpl, env,
-            {'url' : env['PATH_INFO']})
+            {'url' : env['PATH_INFO'],
+            'categories' : categories,
+            'related' : related, 'related_page' : related_page})
 
     elif type(r) in (tuple, list) and len(r) == 3:
         # Respond with custom headers
