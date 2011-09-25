@@ -15,15 +15,15 @@ type="image/png" /> -->
 </head>
 <body>
 
-<div class="related">
-
+<div class="related" style="padding-left: 5px">
 {% block header %}
+<div> <a href="//wizzup.org">Wizzup.org</a>
+      <a href="//blog.wizzup.org/">Blog</a>: »
+    {%block article_name%}
+    {%endblock%}
+</div>
 
-{{ blog_name|safe }}
-{% block midheader %}
-
-{% endblock %}
-
+{# {{ blog_name|safe }} #}
 {% endblock %}
 </div>
 
@@ -61,14 +61,16 @@ type="image/png" /> -->
 
 </div>
 
-<div class="related">
-    Hoi
+<div class="related" style="padding-left: 5px">
+<div> <a href="//wizzup.org">Wizzup.org</a>
+    <a href="//blog.wizzup.org/">Blog</a>: »
+</div>
 </div>
 
 <div class="footer">
 {% block footer %}
 
-Powered by Python and PWBlog | Designed ripped from <a href="http://blog.kompiler.org">blog.kompiler.org</a>
+Powered by Python and PWBlog | Merlijn Wajer, 2011
 
 {% endblock %}
 

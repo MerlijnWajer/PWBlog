@@ -24,7 +24,7 @@ All posts tagged: {{ category }}
         <a href="{{base_url}}/blog/{{x.shortname}}">{{ x.title }}</a>
     </h2>
 
-    <p> by: {{ x.author.name }} on {{ x.creation_date }}. </p>
+    <p> by: {{ x.author.name }} on {{ x.creation_date.strftime("%A, %d %B %Y") }}. </p>
 
     <p>
     </p>

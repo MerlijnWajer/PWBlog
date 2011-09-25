@@ -8,4 +8,44 @@
     <ul><li>{{url}}</li></ul>
 {% endblock %}
 
+{% block aside %}
 
+<h4> Recent posts </h4>
+<ul>
+    {% for x in related %}
+    <li>
+        <span class="datetime">
+            {{ x.creation_date.strftime('%a %d. %b %Y') }}
+        </span>
+        <a class="aside-pl" href="{{base_url}}/blog/{{ x.shortname }}">{{ x.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h4> Links </h4>
+
+<ul>
+    {% for x in related_page %}
+    <li>
+        <span class="datetime">
+            {{ x.creation_date.strftime('%a %d. %b %Y') }}
+        </span>
+        <a class="aside-pl" href="{{base_url}}/page/{{ x.shortname }}">{{ x.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<h4> Categories </h4>
+<ul>
+    {% for x in categories %}
+    <li>
+    <a class="aside-pl" href="{{base_url}}/category/{{ x.name }}">{{ x.name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% if content %}
+{{ content|safe }}
+{% endif %}
+
+{% endblock %}
